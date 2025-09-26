@@ -3,6 +3,9 @@
 [![CI](https://github.com/LeoncioXavier/compare-strings/actions/workflows/ci.yml/badge.svg)](https://github.com/LeoncioXavier/compare-strings/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/LeoncioXavier/compare-strings/branch/main/graph/badge.svg)](https://codecov.io/gh/LeoncioXavier/compare-strings)
 [![PyPI version](https://badge.fury.io/py/compare-strings.svg)](https://pypi.org/project/compare-strings/)
+[![PyPI downloads](https://img.shields.io/pypi/dm/compare-strings.svg)](https://pypi.org/project/compare-strings/)
+[![Python versions](https://img.shields.io/pypi/pyversions/compare-strings.svg)](https://pypi.org/project/compare-strings/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A custom string comparison tool that expands strings based on letter and digit values.
 
