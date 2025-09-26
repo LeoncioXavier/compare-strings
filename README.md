@@ -1,7 +1,7 @@
 # compare-strings
 
 [![CI](https://github.com/LeoncioXavier/compare-strings/actions/workflows/ci.yml/badge.svg)](https://github.com/LeoncioXavier/compare-strings/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/LeoncioXavier/compare-strings/branch/main/graph/badge.svg)](https://codecov.io/gh/LeoncioXavier/compare-strings)
+[![Pull Requests](https://img.shields.io/github/issues-pr/LeoncioXavier/compare-strings)](https://github.com/LeoncioXavier/compare-strings/pulls)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A sophisticated string comparison utility that implements a unique algorithm for determining string "equivalence" based on character expansion and sequence matching. Unlike standard string comparison, this tool considers letters as having equal weight while digits contribute their numeric values, enabling creative matching scenarios for text processing and analysis.
