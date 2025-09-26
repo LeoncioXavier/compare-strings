@@ -2,34 +2,32 @@
 
 [![CI](https://github.com/LeoncioXavier/compare-strings/actions/workflows/ci.yml/badge.svg)](https://github.com/LeoncioXavier/compare-strings/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/LeoncioXavier/compare-strings/branch/main/graph/badge.svg)](https://codecov.io/gh/LeoncioXavier/compare-strings)
-[![PyPI version](https://badge.fury.io/py/compare-strings.svg)](https://pypi.org/project/compare-strings/)
-[![PyPI downloads](https://img.shields.io/pypi/dm/compare-strings.svg)](https://pypi.org/project/compare-strings/)
-[![Python versions](https://img.shields.io/pypi/pyversions/compare-strings.svg)](https://pypi.org/project/compare-strings/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A custom string comparison tool that expands strings based on letter and digit values.
 
-## Installation
+## Setup
 
-```bash
-pip install compare-strings
-```
-
-Or from source:
+Clone the repository and set up a Python virtual environment:
 
 ```bash
 git clone https://github.com/LeoncioXavier/compare-strings.git
 cd compare-strings
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -e .
 ```
 
 ## Usage
 
+After setting up the virtual environment, activate it and run the script:
+
 ```bash
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 compare-strings "string1" "string2"
 ```
 
-Or as a module:
+Or use it as a module in Python:
 
 ```python
 from compare_strings import compare_strings
@@ -54,11 +52,12 @@ compare-strings "abc" "abc"  # True
 
 # Different counts
 compare-strings "a" "ab"     # False (1 vs 2)
+compare-strings "ab" "abc"   # False (2 vs 3)
 
-# Prefix match
-compare-strings "ab" "abc"   # True
+# Prefix match (same count, one letter sequence is prefix of the other)
+compare-strings "a1" "ab"    # True (count=2, letters="a" vs "ab")
 
-# Digit expansion
+# Digit expansion differences
 compare-strings "a1" "b2"    # False (2 vs 3)
 ```
 

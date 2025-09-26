@@ -25,12 +25,14 @@ class TestCompareStrings:
 
     def test_different_counts(self):
         assert compare_strings("a", "ab") == False  # 1 vs 2
+        assert compare_strings("ab", "abc") == False  # 2 vs 3, different counts despite seeming like prefix
 
     def test_same_count_different_letters(self):
         assert compare_strings("ab", "cd") == False
 
     def test_prefix_match(self):
-        assert compare_strings("a1", "ab") == True  # "a1" count 2, letters "a"; "ab" count 2, letters "ab"; "ab".startswith("a") = True
+        # Only applies when counts are equal
+        assert compare_strings("a1", "ab") == True  # count=2 for both, "ab".startswith("a") = True
 
     def test_empty_strings(self):
         assert compare_strings("", "") == True
