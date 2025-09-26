@@ -4,7 +4,15 @@
 [![codecov](https://codecov.io/gh/LeoncioXavier/compare-strings/branch/main/graph/badge.svg)](https://codecov.io/gh/LeoncioXavier/compare-strings)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A custom string comparison tool that expands strings based on letter and digit values.
+A sophisticated string comparison utility that implements a unique algorithm for determining string "equivalence" based on character expansion and sequence matching. Unlike standard string comparison, this tool considers letters as having equal weight while digits contribute their numeric values, enabling creative matching scenarios for text processing and analysis.
+
+## Features
+
+- **Custom Comparison Logic**: Letters count as 1, digits add their numeric value
+- **Sequence Validation**: Checks for prefix relationships when expansion values match
+- **Command-line Interface**: Easy-to-use CLI for quick comparisons
+- **Python Library**: Import and use in your Python projects
+- **Comprehensive Testing**: Full test coverage with edge case handling
 
 ## Setup
 
