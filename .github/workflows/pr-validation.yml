@@ -1,7 +1,7 @@
-name: CI
+name: PR Validation
 
 on:
-  push:
+  pull_request:
     branches: [ main ]
 
 jobs:
@@ -21,4 +21,4 @@ jobs:
         pip install pytest
     - name: Run tests
       run: |
-        pytest
+        pytest --tb=short
