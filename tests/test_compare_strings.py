@@ -1,6 +1,19 @@
 import pytest
 from compare_strings import expand_string, compare_strings
 
+"""
+Test suite for the compare_strings module.
+
+This file validates the core string comparison algorithm by covering:
+- Expansion of strings into counts, including handling of letters, digits, and special characters.
+- Comparison of strings based on their expanded counts and letter content.
+- Edge cases such as empty strings, strings with only digits or letters, and special characters.
+- Case sensitivity in string comparison.
+- Prefix logic when counts are equal, ensuring correct handling of partial matches.
+- Scenarios where strings have the same count but different letters, or where digit expansion leads to different total counts.
+
+Each test case documents the expected behavior for its scenario, including both typical and edge cases.
+"""
 class TestExpandString:
     def test_empty_string(self):
         assert expand_string("") == 0
