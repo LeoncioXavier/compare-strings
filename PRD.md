@@ -1,117 +1,66 @@
 # Product Requirement Document: Compare Strings Script Improvements
 
 ## Overview
-The `compare-strings.py` script provides a custom string comparison functionality that expands strings by counting letters as 1 and digits as their numeric value, then compares total counts and letter sequences. This document analyzes the current implementation and identifies edge cases requiring improvements to enhance robustness, usability, and correctness.
+The `compare-strings` tool implements a sophisticated pattern matching algorithm for string comparison. The second string acts as a pattern that can specify expected character sequences and missing character counts, enabling flexible matching scenarios for text processing and validation.
 
 ## Current Functionality
-- **String Expansion**: Converts strings to numeric values where letters = 1, digits = their value
-- **Count Comparison**: Checks if expanded values are equal
-- **Letter Sequence Validation**: If counts match, verifies if one letter sequence is a prefix of the other
-- **Command-line Interface**: Accepts two string arguments
+- **Pattern Parsing**: Extracts letters, marker digits, and missing character counts from pattern strings
+- **Length Validation**: Ensures the target string has the expected total length
+- **Prefix Matching**: Verifies the target string starts with the expected character sequence
+- **Command-line Interface**: Accepts two string arguments for comparison
+- **Python Library**: Importable module for programmatic use
 
 ## Identified Edge Cases and Issues
 
-### 1. Empty String Handling
-**Current Behavior**: 
-- Empty strings have count = 0
-- Two empty strings return True
-- One empty string vs non-empty returns False (unless non-empty has count 0, which is impossible with current logic)
+### 1. Pattern Parsing Edge Cases
+**Current Behavior**:
+- Patterns with insufficient digits fall back to exact matching
+- Malformed patterns may not parse as expected
 
 **Issues**:
-- No special handling for empty inputs
-- May confuse users expecting standard string comparison
+- Unclear behavior when patterns don't follow expected format
+- No validation of pattern syntax
 
 **Improvement Requirements**:
-- Allow empty strings as valid input
-- Document behavior clearly
-- Consider if empty strings should be considered equal
+- Clear documentation of pattern format
+- Input validation with helpful error messages
+- Support for various pattern formats
 
 ### 2. Case Sensitivity
-**Current Behavior**: Case-sensitive comparison (e.g., "A" vs "a" are different)
+**Current Behavior**: Case-sensitive comparison in pattern matching
 
 **Issues**:
-- "Hello" and "hello" have same letters but different cases, treated as different
-- May not match user expectations for text comparison
+- "ABC13" vs "abc1234" fails due to case differences
+- May not match user expectations for flexible matching
 
 **Improvement Requirements**:
 - Add case-insensitive option
-- Default to case-sensitive for backward compatibility
+- Default to case-sensitive for precision
 - Command-line flag to toggle case sensitivity
 
-### 3. Non-Alphanumeric Character Handling
-**Current Behavior**: Ignores non-alphanumeric characters in count calculation, includes only letters in sequence comparison
+### 3. Special Characters in Patterns
+**Current Behavior**: All characters are treated literally in patterns
 
 **Issues**:
-- Spaces, punctuation, symbols are silently ignored
-- "hello world" vs "helloworld" treated as same (count=10, letters="helloworld")
-- Unexpected behavior for users
+- Special regex characters in patterns may cause unexpected behavior
+- No escaping mechanism for literal character matching
 
 **Improvement Requirements**:
-- Option to include/exclude whitespace
-- Clear documentation of character handling
-- Validation warnings for unexpected characters
+- Document character handling in patterns
+- Consider regex support for advanced patterns
+- Clear examples of literal vs special character usage
 
-### 4. Digit-Only Strings
-**Current Behavior**: 
-- "123" has count = 1+2+3=6, letters=""
-- Two digit-only strings with same sum are considered equal
+### 4. Pattern Length Validation
+**Current Behavior**: No upper/lower bounds on pattern complexity
 
 **Issues**:
-- No letter validation occurs
-- "1" and "2" are different (counts 1 vs 2)
-- "10" and "2" are same (count 1 vs 2? "10" =1+0=1, "2"=2, different)
+- Very long patterns may impact performance
+- No protection against malformed or malicious inputs
 
 **Improvement Requirements**:
-- Consistent behavior documentation
-- Consider if digit-only strings should require exact match
-
-### 5. Unicode and International Characters
-**Current Behavior**: Uses Python's `isalpha()` and `isdigit()` which support Unicode
-
-**Issues**:
-- Limited testing with non-ASCII characters
-- Potential issues with combining characters or special Unicode digits
-
-**Improvement Requirements**:
-- Explicit Unicode support testing
-- Handle Unicode normalization
-- Document supported character sets
-
-### 6. Very Large Numbers
-**Current Behavior**: No upper limit on digit values
-
-**Issues**:
-- "999...9" could create very large integers
-- Potential memory/performance issues with extremely long digit sequences
-
-**Improvement Requirements**:
-- Add maximum digit sequence length validation
-- Handle integer overflow gracefully
-
-### 7. Input Validation
-**Current Behavior**: Minimal validation, assumes valid string inputs
-
-**Issues**:
-- No check for non-string inputs (though command-line provides strings)
-- No length limits
-- No validation for malformed Unicode
-
-**Improvement Requirements**:
+- Reasonable limits on pattern length
 - Input sanitization
-- Length limits with configurable maximum
-- Error messages for invalid inputs
-
-### 8. Performance Considerations
-**Current Behavior**: O(n) time complexity where n is string length
-
-**Issues**:
-- No optimization for very long strings
-- Repeated string operations
-
-**Improvement Requirements**:
-- Performance benchmarks
-- Optimization for large inputs
-- Memory usage monitoring
+- Performance considerations for large inputs
 
 ## Proposed Improvements
 

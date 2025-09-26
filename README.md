@@ -14,6 +14,19 @@ A sophisticated string comparison utility that implements a unique algorithm for
 - **Python Library**: Import and use in your Python projects
 - **Comprehensive Testing**: Full test coverage with edge case handling
 
+## Quick Start
+
+For a quick setup and test run, use the provided shell script:
+
+```bash
+./run.sh
+```
+
+This script will:
+- Create a Python virtual environment
+- Install all dependencies
+- Run the compare-strings tool with sample inputs
+
 ## Setup
 
 Clone the repository and set up a Python virtual environment:
@@ -46,27 +59,30 @@ print(result)  # True
 
 ## How it works
 
-The comparison algorithm:
+The comparison algorithm implements a pattern matching system:
 
-1. **Expansion**: Each letter counts as 1, each digit adds its numeric value
-2. **Count Comparison**: Total expanded values must be equal
-3. **Letter Sequence Check**: If counts match, check if one letter sequence is a prefix of the other
+1. **Parse Pattern**: The second string contains a pattern with an optional count
+   - Format: `letters + digit + count` (e.g., "abc13" = "abc" + "1" + "3")
+   - The count indicates how many additional characters are expected
+
+2. **Match Logic**: The first string must:
+   - Start with `letters + digit` from the pattern
+   - Have exactly `len(letters + digit) + count` total characters
 
 ### Examples
 
 ```bash
-# Same strings
+# Exact match (no count in pattern)
 compare-strings "abc" "abc"  # True
 
-# Different counts
-compare-strings "a" "ab"     # False (1 vs 2)
-compare-strings "ab" "abc"   # False (2 vs 3)
+# Pattern match: "abc1" + 3 more chars = 7 total, starts with "abc1"
+compare-strings "abc1234" "abc13"  # True
 
-# Prefix match (same count, one letter sequence is prefix of the other)
-compare-strings "a1" "ab"    # True (count=2, letters="a" vs "ab")
+# Wrong length: expected 7 chars, got 5
+compare-strings "abc12" "abc13"    # False
 
-# Digit expansion differences
-compare-strings "a1" "b2"    # False (2 vs 3)
+# Wrong prefix: doesn't start with "abc1"
+compare-strings "def1234" "abc13"  # False
 ```
 
 ## Development
