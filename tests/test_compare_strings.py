@@ -1,6 +1,9 @@
 import pytest
 from compare_strings import expand_string, compare_strings
 
+# Test suite for the compare-strings functionality
+# This file validates the core string comparison algorithm
+
 class TestExpandString:
     def test_empty_string(self):
         assert expand_string("") == 0
